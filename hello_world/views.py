@@ -2,11 +2,10 @@ from django.shortcuts import render
 from django.http import HttpResponse
 
 import time
-# Create your views here.
+#create your views here
 
-def homePageView(request):
-    """respond to an HTTP request with a simple web page."""
-
+def HomePageView(request):
+    """Respond to an HTTP request with a simple web page."""
 
     response_html = '''
     <html>
@@ -18,5 +17,6 @@ def homePageView(request):
     This page was generated at %s.
     </html>
     ''' % time.ctime()
+
     return HttpResponse(response_html)
 
