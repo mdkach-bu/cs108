@@ -1,4 +1,5 @@
 # file: pages/views.html
+#author: Marissa Kachadoorian (mdkach@bu.edu) (3/26/20)
 #description: provide a view to send to the user
 
 from django.shortcuts import render

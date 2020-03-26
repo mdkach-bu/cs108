@@ -1,3 +1,6 @@
+#file: cs108/urls.py
+#author: Marissa Kachadoorian (mdkach@bu.edu) (3/26/20)
+#description: direct URL requests to view functions
 """cs108 URL Configuration
 
 The `urlpatterns` list routes URLs to views. For more information please see:
