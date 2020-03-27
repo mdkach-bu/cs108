@@ -24,4 +24,5 @@ urlpatterns = [
     path('admin/', admin.site.urls), #built in django admin application
     path('pages/', include('pages.urls')), #include the URLs from our pages project's url
     path('quotes/', include('quotes.urls')), #include the URLs from our quotes project's url
+    path('mini_fb/', include('mini_fb.urls')), #include the URLs from our mini_fb project's url
 ]

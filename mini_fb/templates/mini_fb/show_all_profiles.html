@@ -1,0 +1,32 @@
+<!-- templates/show_all_profiles.html-->
+
+<h1>MiniFacebook</h1>
+<h2>Showing all Profiles</h2>
+
+<!-- scriplet code to display the value of the variable 'all_profiles_list'-->
+
+<table border="0">
+    <colgroup>
+        <col span="1" style="width: 20%;">
+        <col span="1" style="width: 20%;">
+        <col span="1" style="width: 20%;">
+        <col span="1" style="width: 40%;">
+    </colgroup>
+    <tr>
+        <th><h2 style="color:salmon">Name</h2></th>
+        <th><h2 style="color:salmon">City</h2></th>
+        <th><h2 style="color:salmon">Email Address</h2></th>
+        <th><h2 style="color:salmon">Image</h2></th>
+    </tr>
+    {% for profile in all_profiles_list %}
+    <tr>  
+        <td align="center" > {{profile.first_name}} {{profile.last_name}} </td>
+        <td align="center" > {{profile.city}}</td>
+        <td align="center" > {{profile.email_address}}</td>
+        <td align="center" ><img src="{{profile.image_url}}" style="max-width:600;"></td>
+    </tr>
+    {% endfor %}
+</table>
+
+
+
