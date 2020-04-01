@@ -3,9 +3,10 @@
 #description: direct URL requests to view functions
 
 from django.urls import path
-from .views import ShowAllProfilesView
+from .views import *
 
 urlpatterns = [
     path('', ShowAllProfilesView.as_view(), name='home'),
+    path('profile/<int:pk>', ShowProfilePageView.as_view(), name='profile'), #show one person
 
 ]
