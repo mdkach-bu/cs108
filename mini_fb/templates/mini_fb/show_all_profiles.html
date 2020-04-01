@@ -21,10 +21,10 @@
     </tr>
     {% for profile in all_profiles_list %}
         <tr>  
-            <td align="center" ><a href="{% url 'profile' profile.pk %}">{{profile.first_name}}</a> <a href="{% url 'profile' profile.pk %}">{{profile.last_name}}</a></td>
+            <td align="center" ><a href="{% url 'show_profile_page' profile.pk %}">{{profile.first_name}}</a> <a href="{% url 'show_profile_page' profile.pk %}">{{profile.last_name}}</a></td>
             <td align="center" >{{profile.city}}</td>
             <td align="center" >{{profile.email_address}}</td>
-            <td align="center" ><a href="{% url 'profile' profile.pk %}"><img src="{{profile.image_url}}" style="max-width:600;"></a></td>
+            <td align="center" ><a href="{% url 'show_profile_page' profile.pk %}"><img src="{{profile.image_url}}" style="max-width:600;"></a></td>
         </tr>
     {% endfor %}
 </table>
