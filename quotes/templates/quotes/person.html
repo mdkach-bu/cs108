@@ -1,4 +1,8 @@
 <!-- template/person.html-->
+{% extends 'quotes/base.html' %}
+
+{% block content %}
+
 <h1>All Quotes by {{person.name}}</h1>
 
 <ul>
@@ -14,3 +18,5 @@
     <li><img src='{{image}}' style='width: 200;'></li>
     {% endfor %}
 </ul>
+
+{% endblock %}
