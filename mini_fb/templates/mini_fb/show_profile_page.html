@@ -11,6 +11,9 @@
 {{profile.email_address}}<br>
 {{profile.city}}<br>
 
+<pr></pr>
+    <a href="{% url 'update_profile' profile.pk %}">Update this profile</a>
+</pr>
 <br>
 
 <h2>Status Messages</h2>
@@ -29,8 +32,28 @@
             <td align="center">{{p.message}}</td>
         </tr>
     {% endfor %}
-        
+    
 </table>
 
-{% endblock %}
 
+
+<h2>Create Status Message</h2>
+<form method='POST' action="/mini_fb/profile/{{profile.pk}}/post_status">
+{% csrf_token %}
+    <table>
+    {% for field in create_status_form %}
+    <tr>
+        <th>{{field.name}}</th>
+        <td>{{field}}</td>
+    </tr>
+    {% endfor %}
+    <tr>
+        <td></td>
+        <td>
+            <input type="submit" name= 'Create a status' value='Create a status'>
+        </td>
+    </tr>
+    </table>
+</form>
+
+{% endblock %}

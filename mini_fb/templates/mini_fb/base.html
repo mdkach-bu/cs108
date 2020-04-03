@@ -1,15 +1,12 @@
 
-
-
-
-
 <html>
     <head>
         <h1>Mini Facebook</h1>
         <title>
             Mini_Facebook
         </title>
-        <h3><a href="{% url 'home' %}">Home</a></h3>
+        <a href="{% url 'home' %}">Home</a>
+        <a href="{% url 'create_profile' %}">Create a new Profile</a>
     </head>
     <body>
     {% block content %}      

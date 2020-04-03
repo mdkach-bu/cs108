@@ -1,5 +1,5 @@
 from django.db import models
-
+from django.urls import reverse
 # Create your models here.
 
 class Profile(models.Model):
@@ -23,15 +23,19 @@ class Profile(models.Model):
         messages = StatusMessage.objects.filter(profile=self.pk)
         return messages
 
+    def get_absolute_url(self):
+        """Return a URL to display this quote."""
+        return reverse("show_profile_page", kwargs={"pk": self.pk})
+
 class StatusMessage(models.Model):
     """Encapsulate the idea of a status post."""
 
     #data attributes of a profile
-    timestamp = models.TextField(blank=True)
+    timestamp = models.DateTimeField(auto_now_add=True)
     message = models.TextField(blank=True)
     profile = models.ForeignKey('Profile', on_delete="CASCADE")
 
     def __str__(self):
         """return a string representation of this object."""
-        return self.timestamp
+        return '%s %s' % (self.timestamp, self.message)
 
