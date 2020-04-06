@@ -18,6 +18,8 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include #new
+from django.conf.urls.static import static 
+from django.conf import settings
 
 #project-level URL patterns
 urlpatterns = [
@@ -26,3 +28,6 @@ urlpatterns = [
     path('quotes/', include('quotes.urls')), #include the URLs from our quotes project's url
     path('mini_fb/', include('mini_fb.urls')), #include the URLs from our mini_fb project's url
 ]
+
+
+urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
