@@ -3,7 +3,7 @@ from django.shortcuts import render
 # Create your views here.
 from .models import Profile, StatusMessage
 from django.views.generic import ListView, DetailView
-from django.views.generic.edit import CreateView, UpdateView
+from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.shortcuts import redirect
 from django.urls import reverse
 from .forms import CreateProfileForm, UpdateProfileForm, CreateStatusMessageForm
@@ -28,9 +28,11 @@ class ShowProfilePageView(DetailView):
         # obtain the default context data (a dictionary) from the superclass; 
         # this will include the Profile record for this page view
         context = super(ShowProfilePageView, self).get_context_data(**kwargs)
+
         # create a new CreateStatusMessageForm, and add it into the context dictionary
         form = CreateStatusMessageForm()
         context['create_status_form'] = form
+        
         # return this context dictionary
         return context
 
@@ -51,22 +53,67 @@ def create_status_message(request, pk):
     '''
     Process a form submission to post a new status message.
     '''
-    # find the profile that matches the `pk` in the URL
     profile = Profile.objects.get(pk=pk)
 
-    # if and only if we are processing a POST request, try to read the data
-    if request.method == 'POST':
+    form = CreateStatusMessageForm(request.POST or None, request.FILES or None)
+    if request.method == 'POST' or request.method == 'FILES':
 
-        # read the data from this form submission
         message = request.POST['message']
+        #image = request.POST['image']
 
         # save the new status message object to the database
         if message:
 
-            sm = StatusMessage()
+            sm = form.save(commit=False)
             sm.profile = profile
             sm.message = message
             sm.save()
-
+            
     # redirect the user to the show_profile_page view
     return redirect(reverse('show_profile_page', kwargs={'pk': pk}))
+    
+
+class DeleteStatusMessageView(DeleteView):
+    """A view to update a quote and save it to the database."""
+
+    template_name = 'mini_fb/delete_status_form.html'
+    queryset = StatusMessage.objects.all()
+    
+    def get_object(self):
+        """the objective of which is to return the StatusMessage object that should be deleted."""
+        
+        # read the URL data values into variables
+        profile_pk = self.kwargs['profile_pk']
+        status_pk = self.kwargs['status_pk']
+
+        return StatusMessage.objects.get(pk=status_pk)
+
+    def get_context_data(self, **kwargs):
+        """Return a dictionary with context data for this template to use."""
+        #get the default context data:
+        #this will include the Person record for this page view
+        context = super(DeleteStatusMessageView, self).get_context_data(**kwargs)
+
+        st_msg = StatusMessage.objects.get(pk=self.kwargs['status_pk'])
+
+        context['st_msg'] = st_msg
+
+        #return the context dictionary
+        return context
+
+    def get_success_url(self):
+        """Return a URL to which we should be directed after the delete."""
+        
+        # get the pk for this quote
+        pk = self.kwargs.get('status_pk')
+        status_message = StatusMessage.objects.filter(pk=pk).first()
+        
+        #find the person associated with the quote
+        profile = status_message.profile
+        return reverse('show_profile_page', kwargs={'pk':profile.pk})
+        
+
+
+
+    
+    

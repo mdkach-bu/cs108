@@ -27,15 +27,36 @@ class Profile(models.Model):
         """Return a URL to display this quote."""
         return reverse("show_profile_page", kwargs={"pk": self.pk})
 
+    # def get_all_images(self):
+    #     """return a QuerySet of all images for this person."""
+        
+    #     #get all images of this person
+    #     images = Image.objects.filter(profile=self.pk)
+    #     return images
+
 class StatusMessage(models.Model):
     """Encapsulate the idea of a status post."""
 
     #data attributes of a profile
     timestamp = models.DateTimeField(auto_now_add=True)
     message = models.TextField(blank=True)
-    profile = models.ForeignKey('Profile', on_delete="CASCADE")
+    profile = models.ForeignKey('Profile', on_delete=models.CASCADE)
+    image =  models.ImageField(blank=True)
 
     def __str__(self):
         """return a string representation of this object."""
-        return '%s %s' % (self.timestamp, self.message)
+        return '%s %s %s' % (self.timestamp, self.message, self.image)
 
+# class Image(models.Model):
+#     """Represent an image, which is associated with a person."""
+
+#     image_url = models.URLField(blank=True) #url as string
+#     image_file = models.ImageField(blank=True) #an actual image
+#     profile = models.ForeignKey('Profile', on_delete=models.CASCADE)
+
+#     def __str__(self):
+#         """Return a string representation of this image."""
+#         if self.image_url:
+#             return self.image_url
+#         else:
+#             return self.image_file.url #url to the image file
