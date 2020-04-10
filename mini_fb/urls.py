@@ -15,6 +15,8 @@ urlpatterns = [
     path('create_profile', CreateProfileView.as_view(), name='create_profile'),
     path('profile/<int:profile_pk>/delete_status/<int:status_pk>', DeleteStatusMessageView.as_view(), name='delete_status'),
     path('profile/<int:pk>/news_feed', ShowNewsFeedView.as_view(), name='news_feed'),
+    path('profile/<int:pk>/show_possible_friends', ShowPossibleFriendsView.as_view(), name='show_possible_friends'),
+    path('profile/<int:profile_pk>/add_friend/<int:friend_pk>', add_friend ,name='add_friend'),
 ]
 
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

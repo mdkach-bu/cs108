@@ -121,4 +121,23 @@ class ShowNewsFeedView(DetailView):
     queryset = Profile.objects.all()
     
 
+class ShowPossibleFriendsView(DetailView):
+    """A view to display friend suggestions and save it to the database."""
+    
+    model = Profile
+    template_name = 'mini_fb/show_possible_friends.html'
+    context_object_name = 'profile'
+    queryset = Profile.objects.all()
 
+def add_friend(request, profile_pk, friend_pk):
+    """The objective of this function is to process the add_friend request and to add a friend for a given profile."""
+
+    #find the Profile object which is adding the friend and store it into a variable
+    person_to_add_friend = Profile.objects.get(pk=profile_pk)
+    #find the Profile object of the friend to add, and store it into another variable
+    added_friend = Profile.objects.get(pk=friend_pk)
+    #add that friend's Profile into the profile.friends object (using the method add)
+    person_to_add_friend.friends.add(added_friend)
+    #save the profile object
+    added_friend.save()
+    return redirect(reverse('show_profile_page', kwargs={'pk':profile_pk}))

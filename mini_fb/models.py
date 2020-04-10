@@ -43,7 +43,22 @@ class Profile(models.Model):
         own = StatusMessage.objects.filter(profile=self.pk)
         news_page = news | own
         return news_page
-   
+
+    def get_friend_suggestions(self):
+        """obtain and return a QuerySet of all Profile that could be added as friends."""
+        
+        # all_possible_friends = Profile.objects.all()
+        # person = Profile.objects.filter(id=self.pk)[0]
+        # friends = person.friends.all()
+        # for people in all_possible_friends:
+        #     if people not in friends:
+        #         return people
+        #     else:
+        #         return 'No friend suggestions'
+        friends = self.get_friends()
+        friend_suggestions = Profile.objects.exclude(pk__in=friends).exclude(id=self.pk)
+        return friend_suggestions
+
 class StatusMessage(models.Model):
     """Encapsulate the idea of a status post."""
 
