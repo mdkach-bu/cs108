@@ -14,7 +14,7 @@ urlpatterns = [
     path('profile/<int:pk>/update', UpdateProfileView.as_view(), name='update_profile'),
     path('create_profile', CreateProfileView.as_view(), name='create_profile'),
     path('profile/<int:profile_pk>/delete_status/<int:status_pk>', DeleteStatusMessageView.as_view(), name='delete_status'),
-    
+    path('profile/<int:pk>/news_feed', ShowNewsFeedView.as_view(), name='news_feed'),
 ]
 
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

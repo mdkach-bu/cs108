@@ -112,8 +112,13 @@ class DeleteStatusMessageView(DeleteView):
         profile = status_message.profile
         return reverse('show_profile_page', kwargs={'pk':profile.pk})
         
+class ShowNewsFeedView(DetailView):
+    """"A view to display a newsfeed and save it to the database."""
 
-
-
+    model = Profile
+    template_name = 'mini_fb/show_news_feed.html'
+    context_object_name = 'profile'
+    queryset = Profile.objects.all()
     
-    
+
+

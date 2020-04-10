@@ -5,22 +5,22 @@
 {% extends 'mini_fb/base.html' %}
 {% block content %} 
 
-<h3>{{profile.first_name}} {{profile.last_name}}</h3>
+<h2>{{profile.first_name}} {{profile.last_name}}</h2>
 <img src='{{profile.image_url}}' style='width: 400;'><br>
 <br>
 {{profile.email_address}}<br>
 {{profile.city}}<br>
 
 <pr></pr>
-    <a href="{% url 'update_profile' profile.pk %}">Update this profile</a>
+    <a href="{% url 'update_profile' profile.pk %}">Update this profile</a> <a href="{% url 'news_feed' profile.pk %}">News feed</a>
 </pr>
 <br>
 
 <h2>Status Messages</h2>
 <table border="0">
     <colgroup>
-        <col span="1" style="width: 50%;">
-        <col span="1" style="width: 50%;">
+        <col span="1" style="width: 20%;">
+        <col span="1" style="width: 20%;">
     </colgroup>
     <tr>
         <th><h3 style="color:salmon">Time</h3></th>
@@ -31,7 +31,7 @@
             <td align="center">{{p.timestamp}}</td>
             <td align="center">{{p.message}}</td>
             <td>{% if p.image %}
-                <img src='{{p.image.url}}' style='max-width: 400;'>
+                <img src='{{p.image.url}}' style='max-width: 200;'>
                 {% endif %}
             </td>
             <td>
@@ -64,5 +64,27 @@
     </tr>
     </table>
 </form>
+
+
+<h2>{{profile.first_name}} {{profile.last_name}}'s friends</h2>
+
+{% if profile.get_friends %}
+
+{% for f in profile.get_friends %}
+<table border="0">
+    <colgroup>
+        <col span="1" style="width: 50%;">
+        <col span="1" style="width: 50%;">
+    </colgroup>
+    <tr>
+        <td align="center"><a href="{% url 'show_profile_page' f.pk %}">{{f.first_name}}</a> <a href="{% url 'show_profile_page' f.pk %}">{{f.last_name}}</a></td>
+        <td align="center"><a href="{% url 'show_profile_page' f.pk %}"><img src='{{f.image_url}}' style='max-width: 200;'></a></td>
+    </tr>
+</table>
+{% endfor %}
+
+{% else %}
+{{profile.first_name}} doesn't have any friends.
+{% endif %}
 
 {% endblock %}
