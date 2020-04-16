@@ -1,0 +1,31 @@
+{% extends 'project/base.html' %}
+
+{% block content %} 
+<!-- templates/home.html-->
+<center>
+
+
+    <h1>Table of Recipes</h1><br>
+
+    <table border="0">
+        <colgroup>
+            <col span="1" style="width: 20%;">
+            <col span="1" style="width: 20%;">
+            <col span="1" style="width: 60%;">
+        </colgroup>
+        <tr>
+            <th><h2 style="color:salmon">Cook</h2></th>
+            <th><h2 style="color:salmon">Recipe</h2></th>
+            <th><h2 style="color:salmon">Image</h2></th>
+        </tr>
+        {% for x in all_project_list %}
+            <tr>  
+                <td align="center" >{{x.cook}}</td>
+                <td align="center" ><a href="{% url 'recipe' x.pk %}">{{x.recipe}}</a></td>
+                <td align="center" ><a href="{% url 'recipe' x.pk %}"><img src="{{x.image}}" style="max-width:300;"></a></td>
+            </tr>
+        {% endfor %}
+    </table>
+    <a href="{% url 'create_recipe' %}">Create a new Recipe</a>
+</center>
+{% endblock %}

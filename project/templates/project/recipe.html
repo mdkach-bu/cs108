@@ -1,0 +1,16 @@
+{% extends 'project/base.html' %}
+
+{% block content %} 
+<center>
+    <h1>{{recipe.recipe}}</h1>
+    <img src='{{recipe.image}}' style='width: 400;'><br>
+    <h2>{{recipe.cook}}</h2><br>
+    {{recipe.instructions}}<br>    
+    <a href="{% url 'update_recipe' recipe.pk %}">Update this recipe</a><br>
+</center>
+
+
+    
+
+
+{% endblock %}

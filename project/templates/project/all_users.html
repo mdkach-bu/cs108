@@ -1,0 +1,28 @@
+{% extends 'project/base.html' %}
+
+{% block content %} 
+
+
+<center>
+    <h2>See other users and their cookbooks!</h2><br>
+
+    <table border="0">
+        <colgroup>
+            <col span="1" style="width: 50%;">
+            <col span="1" style="width: 50%;">
+        </colgroup>
+        <tr>
+            <th><h2 style="color:salmon">User</h2></th>
+            <th><h2 style="color:salmon">Image</h2></th>
+        </tr>
+        {% for x in all_user_list %}
+            <tr>  
+                <td align="center" ><a href="{% url 'user' x.pk %}">{{x.name}}</a></td>
+                <td align="center" ><a href="{% url 'user' x.pk %}"><img src="{{x.profile_image}}" style="max-width:300;"></a></td>
+            </tr>
+        {% endfor %}
+    </table>
+</center>
+
+
+{% endblock %}
