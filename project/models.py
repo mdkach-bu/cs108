@@ -20,6 +20,16 @@ class Project(models.Model):
         """Return a URL to display this recipe."""
         return reverse("recipe", kwargs={"pk": self.pk})
 
+    def get_all_statusmessages(self):
+        """return a QuerySet of all statuses for this recipe."""
+        
+        #get all status of this person
+        messages = StatusMessage.objects.filter(project=self.pk)
+        return messages
+
+    def __str__(self):
+        return self.recipe
+
 class User(models.Model):
     """This class will define a user and their attributes."""
     
@@ -37,4 +47,33 @@ class User(models.Model):
         """Return a URL to display this user."""
         return reverse("user", kwargs={"pk": self.pk})
 
+    def get_all_statusmessages(self):
+        """return a QuerySet of all quotes for this person."""
+        
+        #get all status of this person
+        messages = StatusMessage.objects.filter(user=self.pk)
+        return messages
+
+    def __str__(self):
+        return self.name
+
     # def get_all_recipes(self):
+
+
+class StatusMessage(models.Model):
+    """Encapsulate the idea of a status post."""
+
+    #data attributes of a profile
+    timestamp = models.DateTimeField(auto_now_add=True)
+    message = models.TextField(blank=True)
+    user = models.ForeignKey('User', on_delete=models.CASCADE)
+    image =  models.URLField(blank=True)
+    
+    def __str__(self):
+        """return a string representation of this object."""
+        return '%s %s' % (self.message, self.image)
+
+class UsersRecipes(models.Model):
+    """A model to connect User and Project(recipe)."""
+    user = models.ForeignKey('User', on_delete=models.CASCADE)
+    project = models.ForeignKey('Project', on_delete=models.CASCADE)

@@ -3,7 +3,9 @@
 #description: direct URL requests to view functions
 
 from django.urls import path
-from .views import HomePageView, RecipePageView, OneRecipePageView, UserPageView, UpdateRecipeView, OneUserPageView, UpdateUserView, CreateRecipeView
+from .views import *
+from django.conf.urls.static import static
+from django.conf import settings
 
 urlpatterns = [
     path('', HomePageView.as_view(), name="home"), 
@@ -14,6 +16,8 @@ urlpatterns = [
     path('all_users/<int:pk>', OneUserPageView.as_view(), name='user'),
     path('all_users/<int:pk>/update', UpdateUserView.as_view(), name='update_user'), #update
     path('create_recipe', CreateRecipeView.as_view(), name='create_recipe'),
+    path('all_users/<int:pk>/post_status', create_status_message, name='post_status'),
+    path('recipe_list/<int:pk>/post_comment', create_comment, name='post_comment'),
     #path('create_profile', CreateProfileView.as_view(), name='create_profile'),
 
 

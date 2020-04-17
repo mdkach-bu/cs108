@@ -5,12 +5,67 @@
     <h1>{{recipe.recipe}}</h1>
     <img src='{{recipe.image}}' style='width: 400;'><br>
     <h2>{{recipe.cook}}</h2><br>
-    {{recipe.instructions}}<br>    
+    <table border="0">
+        <colgroup>
+            <col span="1" style="width: 20%;">
+            <col span="1" style="width: 20%;">
+            <col span="1" style="width: 20%;">
+        </colgroup>
+        <tr>
+            <td></td>
+            <td align="center"><pre>{{recipe.instructions}}<br></pre></td>
+            <td></td>
+        </tr>
+    </table>
+     
     <a href="{% url 'update_recipe' recipe.pk %}">Update this recipe</a><br>
-</center>
 
+    <h2>Comments</h2>
+    <table border="0">
+        <colgroup>
+            <col span="1" style="width: 20%;">
+            <col span="1" style="width: 20%;">
+            <col span="1" style="width: 20%;">
+        </colgroup>
+        <tr>
+            <th><h3 style="color:salmon">Time</h3></th>
+            <th><h3 style="color:salmon">User</h3></th>
+            <th><h3 style="color:salmon">Message</h3></th>
+        </tr>
+        {% for p in project.get_all_statusmessages %}
+            <tr>
+                <td align="center">{{p.timestamp}}</td>
+                <td align="center">{{p.user}}</td>
+                <td align="center">{{p.message}}</td>
+                <td>{% if p.image %}
+                    <img src='{{p.image}}' style='max-width: 200;'>
+                    {% endif %}
+                </td>
+            </tr>
+        {% endfor %}
+    </table>
 
     
+    <form method='POST' enctype="multipart/form-data" action="/project/recipe_list/{{user.pk}}/post_comment">
+    {% csrf_token %}
+
+        <table>
+        {% for st_msg in create_status_form %}
+        <tr>
+            <th>{{st_msg.name}}</th>
+            <td>{{st_msg}}</td>
+        </tr>
+        {% endfor %}
+        <tr>
+            <td></td>
+            <td>
+                <input type="submit" name= 'Create a status' value='Create a status'>
+            </td>
+        </tr>
+        </table>
+    </form>
+
+</center>
 
 
 {% endblock %}
