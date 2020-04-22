@@ -32,7 +32,8 @@
             <th><h3 style="color:salmon">User</h3></th>
             <th><h3 style="color:salmon">Message</h3></th>
         </tr>
-        {% for p in project.get_all_statusmessages %}
+        
+        {% for p in recipe.get_all_comments %}
             <tr>
                 <td align="center">{{p.timestamp}}</td>
                 <td align="center">{{p.user}}</td>
@@ -44,13 +45,12 @@
             </tr>
         {% endfor %}
     </table>
-
     
-    <form method='POST' enctype="multipart/form-data" action="/project/recipe_list/{{user.pk}}/post_comment">
+    <form method='POST' enctype="multipart/form-data" action="/project/recipe_list/{{recipe.pk}}/post_comment">
     {% csrf_token %}
 
         <table>
-        {% for st_msg in create_status_form %}
+        {% for st_msg in create_comment %}
         <tr>
             <th>{{st_msg.name}}</th>
             <td>{{st_msg}}</td>
@@ -59,7 +59,7 @@
         <tr>
             <td></td>
             <td>
-                <input type="submit" name= 'Create a status' value='Create a status'>
+                <input type="submit" name= 'Create a comment' value='Create a comment'>
             </td>
         </tr>
         </table>

@@ -18,7 +18,10 @@ urlpatterns = [
     path('create_recipe', CreateRecipeView.as_view(), name='create_recipe'),
     path('all_users/<int:pk>/post_status', create_status_message, name='post_status'),
     path('recipe_list/<int:pk>/post_comment', create_comment, name='post_comment'),
-    #path('create_profile', CreateProfileView.as_view(), name='create_profile'),
-
+    path('create_user', CreateUserView.as_view(), name='create_user'),
+    path('all_users/<int:pk>/add_recipe', add_recipe_to_cookbook, name='add_recipe'),
+    path('all_users/<int:user_pk>/delete_status/<int:statusmessage_pk>', DeleteStatusMessageView.as_view(), name='delete_status'),
 
 ]
+
+urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
