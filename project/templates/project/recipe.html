@@ -1,9 +1,14 @@
+<!--
+    Filename: templates/recipe.html
+    Name: Marissa Kachadoorian (mdkach@bu.edu)
+    Description: template to show one recipe
+-->
 {% extends 'project/base.html' %}
 
 {% block content %} 
 <center>
     <h1>{{recipe.recipe}}</h1>
-    <img src='{{recipe.image}}' style='width: 400;'><br>
+    <img src='{{recipe.image}}' style='width: 400px;'><br>
     <h2>{{recipe.cook}}</h2><br>
     <table border="0">
         <colgroup>
@@ -28,9 +33,9 @@
             <col span="1" style="width: 20%;">
         </colgroup>
         <tr>
-            <th><h3 style="color:salmon">Time</h3></th>
-            <th><h3 style="color:salmon">User</h3></th>
-            <th><h3 style="color:salmon">Message</h3></th>
+            <th><h3 style="color:Black">Time</h3></th>
+            <th><h3 style="color:black">User</h3></th>
+            <th><h3 style="color:black">Message</h3></th>
         </tr>
         
         {% for p in recipe.get_all_comments %}
@@ -38,10 +43,10 @@
                 <td align="center">{{p.timestamp}}</td>
                 <td align="center">{{p.user}}</td>
                 <td align="center">{{p.message}}</td>
-                <td>{% if p.image %}
-                    <img src='{{p.image}}' style='max-width: 200;'>
+                <!-- <td>{% if p.image %}
+                    <img src='{{p.image}}' style='width: 200px;'>
                     {% endif %}
-                </td>
+                </td> -->
             </tr>
         {% endfor %}
     </table>

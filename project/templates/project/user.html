@@ -1,13 +1,17 @@
+<!--
+    Filename: templates/user.html
+    Name: Marissa Kachadoorian (mdkach@bu.edu)
+    Description: template to show one user's profile
+-->
 {% extends 'project/base.html' %}
 
 {% block content %} 
 
 
-
 <center>
     <h1>This is my cookbook</h1>
     <h3>{{user.name}}</h3>
-    <pr><img src='{{user.profile_image}}' style='width: 400;'></pr><br>
+    <pr><img src='{{user.profile_image}}' style='width: 300px;'></pr><br>
     <br>
     {{user.email}}<br>
     {{user.biography}}<br>
@@ -39,7 +43,7 @@
             <td>
                 <a href="{% url 'recipe' x.pk %}">{{x.project}}</a>
             </td>
-            <td><a href="{% url 'recipe' x.pk %}"><img src='{{x.project.image}}' style='width: 200;'></a></td>
+            <td><a href="{% url 'recipe' x.pk %}"><img src='{{x.project.image}}' style='width: 200px;'></a></td>
         </tr>
         {% endfor %}
     </table>
@@ -77,8 +81,8 @@
         </colgroup>
         <tr>
             <th></th>
-            <th><h3 style="color:salmon">Time</h3></th>
-            <th><h3 style="color:salmon">Message</h3></th>
+            <th><h3 style="color:black">Time</h3></th>
+            <th><h3 style="color:black">Message</h3></th>
             <th></th>
         </tr>
         {% for p in user.get_all_statusmessages %}
@@ -87,7 +91,7 @@
                 <td align="center">{{p.timestamp}}</td>
                 <td align="center">{{p.message}}</td>
                 <td>{% if p.image %}
-                    <img src='{{p.image}}' style='max-width: 200;'>
+                    <img src='{{p.image}}' style='width: 100px;'>
                     {% endif %} 
                 </td>
                 <td>

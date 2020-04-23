@@ -1,3 +1,9 @@
+<!--
+    Filename: all_users.html
+    Name: Marissa Kachadoorian (mdkach@bu.edu)
+    Description: template for page that shows all users
+-->
+
 {% extends 'project/base.html' %}
 
 {% block content %} 
@@ -12,13 +18,13 @@
             <col span="1" style="width: 50%;">
         </colgroup>
         <tr>
-            <th><h2 style="color:salmon">User</h2></th>
-            <th><h2 style="color:salmon">Image</h2></th>
+            <th><h2 style="color:black">User</h2></th>
+            <th><h2 style="color:black">Image</h2></th>
         </tr>
         {% for x in all_user_list %}
             <tr>  
-                <td align="center" ><a href="{% url 'user' x.pk %}">{{x.name}}</a></td>
-                <td align="center" ><a href="{% url 'user' x.pk %}"><img src="{{x.profile_image}}" style="max-width:300;"></a></td>
+                <td align="center" ><a href="{% url 'user' x.pk %}"><h3>{{x.name}}</h3></a></td>
+                <td align="center" ><a href="{% url 'user' x.pk %}"><img src="{{x.profile_image}}" style="width:300px;"></a></td>
             </tr>
         {% endfor %}
     </table>

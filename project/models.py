@@ -1,10 +1,14 @@
+#Filename: project/models.py
+#Name: Marissa Kachadoorian
+#Description: This file contains all the models for my project. The Project model is actually the model for a recipe and UsersRecipes is a model to connect Project and User.
+
 from django.db import models
 from django.urls import reverse
 # Create your models here.
 
 
 class Project(models.Model):
-    """Encapsulate the idea of a recipe. A project is a recipe that can belong to multiple users."""
+    """Encapsulate the idea of a recipe and its attributes. A project is a recipe that can belong to multiple users."""
 
     #data attributes of a recipe:
     recipe = models.TextField(blank=True)
@@ -23,11 +27,14 @@ class Project(models.Model):
     def get_all_comments(self):
         """return a QuerySet of all comments for this person."""
         
-        #get all status of this person
-        messages = Comment.objects.filter(project=self.pk)
-        return messages
+        #get all comments of this recipe and define as 'messages'
+        comment = Comment.objects.filter(project=self.pk)
+
+        #return messages
+        return comment
 
     def __str__(self):
+        """return a string representation of this object."""
         return self.recipe
 
 class User(models.Model):
@@ -41,29 +48,40 @@ class User(models.Model):
 
     def __repr__(self):
         """return a string representation of this object."""
+
         return '%s %s' % (self.name, self.email)
 
     def get_absolute_url(self):
         """Return a URL to display this user."""
+
         return reverse("user", kwargs={"pk": self.pk})
 
     def get_all_statusmessages(self):
         """return a QuerySet of all quotes for this person."""
         
         #get all status of this person
-        messages = StatusMessage.objects.filter(user=self.pk)
-        return messages
+        statusmessages = StatusMessage.objects.filter(user=self.pk)
+
+        #return statusmessages
+        return statusmessages
 
     def __str__(self):
+        """return a string representation of this object."""
+
         return self.name
 
     def get_all_recipes(self):
+        """return a QuerySet of all recipes for this user."""
+
+        #get all recipes of this user
         recipes = UsersRecipes.objects.filter(user=self.pk)
+
+        #return recipes
         return recipes
 
 
 class StatusMessage(models.Model):
-    """Encapsulate the idea of a status post."""
+    """Encapsulate the idea of a status post on a user's profile."""
 
     #data attributes of a profile
     timestamp = models.DateTimeField(auto_now_add=True)
@@ -73,24 +91,27 @@ class StatusMessage(models.Model):
     
     def __str__(self):
         """return a string representation of this object."""
+
         return '%s %s' % (self.message, self.image)
 
 
 class UsersRecipes(models.Model):
     """A model to connect User and Project(recipe)."""
 
+    #foreign key relationships and one data attribute
     timestamp = models.DateTimeField(blank=True, auto_now=True)
     user = models.ForeignKey('User', on_delete=models.CASCADE)
     project = models.ForeignKey('Project', on_delete=models.CASCADE)
 
     def __str__(self):
         """return a string representation of this object."""
+
         return '%s %s' % (self.timestamp, self.project)
 
 class Comment(models.Model):
-    """Encapsulate the idea of a status post."""
+    """Encapsulate the idea of a comment on a recipe."""
 
-    #data attributes of a profile
+    #data attributes of a profile and foreign key relationships to user and project
     timestamp = models.DateTimeField(auto_now_add=True)
     message = models.TextField(blank=True)
     user = models.ForeignKey('User', on_delete=models.CASCADE)
@@ -99,5 +120,6 @@ class Comment(models.Model):
     
     def __str__(self):
         """return a string representation of this object."""
+        
         return '%s %s' % (self.message, self.image)
 
