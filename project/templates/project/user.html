@@ -41,9 +41,9 @@
                 {{x.timestamp}}
             </td>
             <td>
-                <a href="{% url 'recipe' x.pk %}">{{x.project}}</a>
+                <a href="{% url 'recipe' x.project.pk %}">{{x.project}}</a>
             </td>
-            <td><a href="{% url 'recipe' x.pk %}"><img src='{{x.project.image}}' style='width: 200px;'></a></td>
+            <td><a href="{% url 'recipe' x.project.pk %}"><img src='{{x.project.image}}' style='width: 200px;'></a></td>
         </tr>
         {% endfor %}
     </table>

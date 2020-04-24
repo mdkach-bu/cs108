@@ -15,6 +15,7 @@ class Project(models.Model):
     cook = models.TextField(blank=True)
     image = models.URLField(blank=True)
     instructions = models.TextField(blank=True)
+    cooktime = models.IntegerField(default=1)
 
     def __repr__(self):
         """return a string representation of this object."""
@@ -42,7 +43,7 @@ class User(models.Model):
     
     #data attributes of a user
     name = models.TextField(blank=True)
-    email = models.TextField(blank=True)
+    email = models.EmailField(blank=True)
     profile_image = models.URLField(blank=True)
     biography = models.TextField(blank=True)
 
@@ -120,6 +121,10 @@ class Comment(models.Model):
     
     def __str__(self):
         """return a string representation of this object."""
-        
+
         return '%s %s' % (self.message, self.image)
 
+# class Promise(models.Model):
+#     title = models.CharField(max_length=300)
+#     description = models.TextField(blank=True)
+#     made_on = models.DateField()

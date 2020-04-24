@@ -6,7 +6,7 @@
 {% extends 'project/base.html' %}
 
 {% block content %} 
-
+<center>
 <h2>Update User's Profile</h2>
 
 <form method='POST'>
@@ -26,4 +26,10 @@
     </tr>
     </table>
 </form>
+<!-- 
+<form action="" method="post">{% csrf_token %}
+    {{ form.as_p }}
+    <input type="submit" value="Create" />
+</form> -->
+</center>
 {% endblock %}

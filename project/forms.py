@@ -4,6 +4,7 @@
 
 from django import forms
 from .models import Project, User, StatusMessage, Comment, UsersRecipes
+from django.forms import ModelForm
 
 class UpdateRecipeForm(forms.ModelForm):
     """A form to update a recipe to the database."""
@@ -13,7 +14,7 @@ class UpdateRecipeForm(forms.ModelForm):
 
         model = Project #define which model to use
 
-        fields = ['recipe', 'cook', 'instructions', 'image'] #which fields from model should we use
+        fields = ['recipe', 'cook', 'instructions', 'image', 'cooktime'] #which fields from model should we use
 
 class UpdateUserForm(forms.ModelForm):
     """A form to update a recipe to the database."""
@@ -32,6 +33,7 @@ class CreateRecipeForm(forms.ModelForm):
     cook = forms.CharField(label="Cook", required=True)
     instructions = forms.CharField(widget= forms.Textarea, label="Instructions", required=True)
     image = forms.URLField(label="Picture URL", required=True)
+    cooktime = forms.IntegerField(label="Cooktime (min)", required=True)
     
     class Meta:
         """Associate this form with the Project mode."""
@@ -68,7 +70,7 @@ class CreateUserForm(forms.ModelForm):
     """A form to add new profiles to the database"""
 
     name = forms.CharField(label="Name", required=True)
-    email = forms.CharField(label="Email Address", required=True)
+    email = forms.EmailField(label="Email Address", required=True)
     biography = forms.CharField(widget= forms.Textarea, label="Biography", required=True)
     profile_image = forms.URLField(label="Picture URL", required=True)
     
@@ -89,3 +91,25 @@ class AddRecipeForm(forms.ModelForm):
         model = UsersRecipes #define which model to use
 
         fields = ['project',] #which fields from model should we use
+
+# class DietaryForm(forms.Form):
+#     """form to make a dynamic dropdown."""
+
+#     OPTIONS = (
+#         ("SUG", "Sugar Free"),
+#         ("VEG", "Vegetarian"),
+#         ("GLU", "Gluten Free"),)
+#     diets = forms.MultipleChoiceField(widget=forms.CheckboxSelectMultiple, choices=OPTIONS)
+
+# class DateInput(forms.DateInput):
+#     input_type = 'date'
+
+
+# class PromiseForm(ModelForm):
+
+#     class Meta:
+#         model = Promise
+#         fields = ['title', 'description', 'made_on']
+#         widgets = {
+#             'made_on': DateInput(),
+#         }
