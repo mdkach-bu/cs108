@@ -1,6 +1,6 @@
 from django.contrib import admin
-from .models import Project
-admin.site.register(Project)
+from .models import Recipe
+admin.site.register(Recipe)
 # Register your models here.
 from .models import User, StatusMessage, UsersRecipes, Comment #Promise
 admin.site.register(User)

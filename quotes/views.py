@@ -94,15 +94,17 @@ class DeleteQuoteView(DeleteView):
         
         #find the person associated with the quote
         person = quote.person
-        return reverse('person', kwargs={'pk':person.pk})
+
         #reverse to show the person page
+        return reverse('person', kwargs={'pk':person.pk})
+        
 
 def add_image(request, pk):
      """A custom view function to handle the submission of an image upload"""
      #find the person for whom we are submitting the image
      person = Person.objects.get(pk=pk)
 
-     #read request data inot AddImageForm object
+     #read request data into AddImageForm object
      form = AddImageForm(request.POST or None, request.FILES or None)
     
      #check if the form is valid, save object to database

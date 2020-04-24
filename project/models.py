@@ -38,6 +38,13 @@ class Project(models.Model):
         """return a string representation of this object."""
         return self.recipe
 
+    class Meta:
+        abstract = True
+
+
+class Recipe(Project):
+    pass
+
 class User(models.Model):
     """This class will define a user and their attributes."""
     
@@ -102,7 +109,7 @@ class UsersRecipes(models.Model):
     #foreign key relationships and one data attribute
     timestamp = models.DateTimeField(blank=True, auto_now=True)
     user = models.ForeignKey('User', on_delete=models.CASCADE)
-    project = models.ForeignKey('Project', on_delete=models.CASCADE)
+    project = models.ForeignKey('Recipe', on_delete=models.CASCADE)
 
     def __str__(self):
         """return a string representation of this object."""
@@ -117,7 +124,7 @@ class Comment(models.Model):
     message = models.TextField(blank=True)
     user = models.ForeignKey('User', on_delete=models.CASCADE)
     image =  models.URLField(blank=True)
-    project = models.ForeignKey('Project', on_delete=models.CASCADE)
+    project = models.ForeignKey('Recipe', on_delete=models.CASCADE)
     
     def __str__(self):
         """return a string representation of this object."""

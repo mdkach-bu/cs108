@@ -28,12 +28,13 @@
             <th><h2 style="color:black">Image</h2></th>
             <th></th>
         </tr>
-        {% for x in all_project_list %}
+        {% for each_recipe in all_project_list %} <!--this for loop goes through each recipe in a list 
+            of recipes and displays the cook name, recipe name, and image-->
             <tr>  
                 <td></td>
-                <td align="center" ><h3>{{x.cook}}</h3></td>
-                <td align="center" ><a href="{% url 'recipe' x.pk %}"><h3>{{x.recipe}}</h3></a></td>
-                <td align="center" ><a href="{% url 'recipe' x.pk %}"><img src="{{x.image}}" style="width:300px;"></a></td>
+                <td align="center" ><h3>{{each_recipe.cook}}</h3></td>
+                <td align="center" ><a href="{% url 'recipe' each_recipe.pk %}"><h3>{{each_recipe.recipe}}</h3></a></td>
+                <td align="center" ><a href="{% url 'recipe' each_recipe.pk %}"><img src="{{each_recipe.image}}" style="width:300px;"></a></td>
                 <td></td>
             </tr>
         {% endfor %}

@@ -12,7 +12,8 @@
     <form method='POST'>
     {% csrf_token %}
         <table>
-        {% for field in form %}
+        {% for field in form %} <!--for each field in this form submission for 
+            loop, display the form label and form field-->
         <tr>
             <th>{{field.label}}</th>
             <td>{{field}}</td>

@@ -12,7 +12,8 @@
 <form method='POST'>
 {% csrf_token %}
     <table>
-    {% for field in form %}
+    {% for field in form %} <!--for each field in this form submission for loop, 
+        display the form label and form field-->
     <tr>
         <th>{{field.name}}</th>
         <td>{{field}}</td>
@@ -26,10 +27,6 @@
     </tr>
     </table>
 </form>
-<!-- 
-<form action="" method="post">{% csrf_token %}
-    {{ form.as_p }}
-    <input type="submit" value="Create" />
-</form> -->
+
 </center>
 {% endblock %}

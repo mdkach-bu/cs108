@@ -3,7 +3,7 @@
 #Description: creates the class forms to update and create recipes and users
 
 from django import forms
-from .models import Project, User, StatusMessage, Comment, UsersRecipes
+from .models import Project, User, StatusMessage, Comment, UsersRecipes, Recipe
 from django.forms import ModelForm
 
 class UpdateRecipeForm(forms.ModelForm):
@@ -12,7 +12,7 @@ class UpdateRecipeForm(forms.ModelForm):
     class Meta:
         """Associate this form with the Project mode."""
 
-        model = Project #define which model to use
+        model = Recipe #define which model to use
 
         fields = ['recipe', 'cook', 'instructions', 'image', 'cooktime'] #which fields from model should we use
 
@@ -38,9 +38,9 @@ class CreateRecipeForm(forms.ModelForm):
     class Meta:
         """Associate this form with the Project mode."""
 
-        model = Project #define which model to use
+        model = Recipe #define which model to use
 
-        fields = ['recipe', 'cook', 'instructions', 'image'] #which fields from model should we use
+        fields = ['recipe', 'cook', 'instructions', 'image', 'cooktime'] #which fields from model should we use
 
 class CreateStatusMessageForm(forms.ModelForm):
     """A form to create a status."""

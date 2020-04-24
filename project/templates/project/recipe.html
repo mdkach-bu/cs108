@@ -22,11 +22,11 @@
             <td></td>
         </tr>
     </table>
-    <h3>Cooktime: {{recipe.cooktime}}</h3>
+    <h3>Cooktime: {{recipe.cooktime}} min</h3>
      
-    <a href="{% url 'update_recipe' recipe.pk %}">Update this recipe</a><br>
+    <a href="{% url 'update_recipe' recipe.pk %}">Update this recipe</a><br> <!--link to update recipe-->
 
-    <h2>Comments</h2>
+    <h2>Comments</h2> <!--comments on a recipe-->
     <table border="0">
         <colgroup>
             <col span="1" style="width: 20%;">
@@ -39,11 +39,12 @@
             <th><h3 style="color:black">Message</h3></th>
         </tr>
         
-        {% for p in recipe.get_all_comments %}
+        {% for comment in recipe.get_all_comments %} <!--for each comment in a recipe's comment, display the 
+        timestamp, user, and message-->
             <tr>
-                <td align="center">{{p.timestamp}}</td>
-                <td align="center">{{p.user}}</td>
-                <td align="center">{{p.message}}</td>
+                <td align="center">{{comment.timestamp}}</td>
+                <td align="center">{{comment.user}}</td>
+                <td align="center">{{comment.message}}</td>
                 <!-- <td>{% if p.image %}
                     <img src='{{p.image}}' style='width: 200px;'>
                     {% endif %}
@@ -56,10 +57,11 @@
     {% csrf_token %}
 
         <table>
-        {% for st_msg in create_comment %}
+        {% for f_field in create_comment %} <!--in this for loop form, it goes through every  
+            f_field aka form field and displays the label and form-->
         <tr>
-            <th>{{st_msg.name}}</th>
-            <td>{{st_msg}}</td>
+            <th>{{f_field.name}}</th>
+            <td>{{f_field}}</td>
         </tr>
         {% endfor %}
         <tr>

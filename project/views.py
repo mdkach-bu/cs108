@@ -19,24 +19,24 @@ class HomePageView(TemplateView):
 class RecipePageView(ListView):
     """create a subclass of ListView to display all the recipes."""
     
-    Model = Project #retrieve objects of type Project from the database
+    Model = Recipe #retrieve objects of type Project from the database
 
     template_name = 'project/recipe_list.html' #define template
 
     context_object_name = 'all_project_list' #how to find the data in the template file
 
-    queryset = Project.objects.all()
+    queryset = Recipe.objects.all()
 
 class OneRecipePageView(DetailView):
     """shows one recipe and all its details."""
 
-    Model = Project #retrieve objects of type Project from the database
+    Model = Recipe #retrieve objects of type Project from the database
 
     template_name = 'project/recipe.html'
 
     context_object_name = 'recipe' #how to find the data in the template file
 
-    queryset = Project.objects.all()
+    queryset = Recipe.objects.all()
 
     def get_context_data(self, **kwargs):
         '''Return the context data (a dictionary) to be used in the template.'''
@@ -59,7 +59,7 @@ def create_comment(request, pk):
     '''Process a form submission to post a new comment.'''
 
     #find the project for whom we are submitting the comment
-    project = Project.objects.get(pk=pk)
+    project = Recipe.objects.get(pk=pk)
 
     #read request data into CreateCommentForm object
     form = CreateCommentForm(request.POST or None, request.FILES or None)
@@ -98,8 +98,18 @@ class UpdateRecipeView(UpdateView):
 
     template_name = 'project/update_recipe.html'
 
-    queryset = Project.objects.all()
+    queryset = Recipe.objects.all()
     
+    # def update_view(request):
+    #     if request.method == 'POST':
+    #         form = DietaryForm(request.POST)
+    #         if form.is_valid():
+    #             Diets = form.cleaned_data.get('Diets')
+    #             # do something with your results
+    #     else:
+    #         form = DietaryForm
+
+    #     return render_to_response('update_recipe.html', {'form': form}, context_instance=RequestContext(request))
 
 class OneUserPageView(DetailView):
     """A view to show one user and all its details."""
@@ -254,5 +264,3 @@ class DeleteStatusMessageView(DeleteView):
         #reverse to show the profile page
 
         return reverse('user', kwargs={'pk':user.pk})
-
-        

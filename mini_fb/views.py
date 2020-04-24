@@ -7,6 +7,7 @@ from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.shortcuts import redirect
 from django.urls import reverse
 from .forms import CreateProfileForm, UpdateProfileForm, CreateStatusMessageForm
+
 class ShowAllProfilesView(ListView):
     """Create a subclass of ListView to display all profiles."""
 

@@ -21,10 +21,12 @@
             <th><h2 style="color:black">User</h2></th>
             <th><h2 style="color:black">Image</h2></th>
         </tr>
-        {% for x in all_user_list %}
+        <!--for each user in a list of users, go through for loop and display the name and image-->
+        {% for user in all_user_list %}
             <tr>  
-                <td align="center" ><a href="{% url 'user' x.pk %}"><h3>{{x.name}}</h3></a></td>
-                <td align="center" ><a href="{% url 'user' x.pk %}"><img src="{{x.profile_image}}" style="width:300px;"></a></td>
+                <td align="center" ><a href="{% url 'user' user.pk %}"><h3>{{user.name}}</h3></a></td>
+                <td align="center" ><a href="{% url 'user' user.pk %}"><img src="{{user.profile_image}}" 
+                    style="width:300px;"></a></td>
             </tr>
         {% endfor %}
     </table>
