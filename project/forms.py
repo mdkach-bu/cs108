@@ -1,6 +1,8 @@
 #Filename: project/forms.py
 #Name: Marissa Kachadoorian (mdkach@bu.edu)
-#Description: creates the class forms to update and create recipes and users
+#Description: creates the class forms to update recipes, update user's profiles, create new recipes
+#create a status message, create a comment on a recipe, make a new user, and add a new recipe to someone's 
+#cookbook  on their personal page.
 
 from django import forms
 from .models import Project, User, StatusMessage, Comment, UsersRecipes, Recipe
@@ -45,7 +47,7 @@ class CreateRecipeForm(forms.ModelForm):
 class CreateStatusMessageForm(forms.ModelForm):
     """A form to create a status."""
 
-    image = forms.URLField(label="Upload Picture", required=False)
+    image = forms.ImageField(label="Upload Picture", required=False)
 
     class Meta:
         """Associate this form with the Project mode."""

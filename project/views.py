@@ -1,6 +1,16 @@
 #Filename: project/views.py
 #Name: Marissa Kachadoorian (mdkach@bu.edu)
 #Description: This file contains all the views for my project deriving from TemplateView, DetailView, UpdateView, CreateView, and DeleteView
+#the following views are HomePageView which creates a subclass of TemplateView to display our homepage,
+#RecipePageView which created a subclass of ListView to display all the recipes
+#OneRecipePageView  which shows one recipe and all its details
+#UserPageView which shows the profile of all users
+#UpdateRecipeView which is able to update a recipe
+#OneUserPageView which shows the profile of one user
+#UpdateUserView which allows you to update a profile and its information
+#CreateRecipePageView which allows you to create a new recipe
+#CreateUserPageView which allows you to create a new user
+#DeleteStatusPageView which allows you to delete a status post
 
 from django.shortcuts import render
 from .models import Project, User, StatusMessage, Comment

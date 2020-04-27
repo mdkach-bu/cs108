@@ -1,6 +1,8 @@
 #file: project/urls.py
 #author: Marissa Kachadoorian (mdkach@bu.edu) (4/26/20)
-#description: direct URL requests to view functions
+#description: direct URL requests to view functions such as the homepage, recipe list, one recipe, 
+# all profiles in a list, update a recipe, show one user, update a profile, create a new recipe, create 
+#a status message post, post a comment on a recipe, create a new profile, and create a new recipe.
 
 from django.urls import path
 from .views import *

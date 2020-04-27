@@ -1,6 +1,10 @@
 #Filename: project/models.py
 #Name: Marissa Kachadoorian
-#Description: This file contains all the models for my project. The Project model is actually the model for a recipe and UsersRecipes is a model to connect Project and User.
+#Description: This file contains all the models for my project. The Project model is actually the model for 
+# a recipe (all things directed to recipe will be passed through the Project model, UsersRecipes is a model 
+# to connect Project and User, StatusMessage is a model to create a status post on  your own cookbook,
+# Comment is a model for commenting on a recipe, and User is a model for a user or profile (someone making 
+# their own cookbook) 
 
 from django.db import models
 from django.urls import reverse
@@ -48,7 +52,7 @@ class Project(models.Model):
 
 class Recipe(Project):
     """this class reroutes all things for the Project model to the Recipe Model."""
-    
+
     pass
 
 class User(models.Model):
@@ -101,7 +105,7 @@ class StatusMessage(models.Model):
     timestamp = models.DateTimeField(auto_now_add=True)
     message = models.TextField(blank=True)
     user = models.ForeignKey('User', on_delete=models.CASCADE)
-    image =  models.URLField(blank=True)
+    image =  models.ImageField(blank=True)
     
     def __str__(self):
         """return a string representation of this object."""
