@@ -23,7 +23,7 @@ class RecipePageView(ListView):
 
     template_name = 'project/recipe_list.html' #define template
 
-    context_object_name = 'all_project_list' #how to find the data in the template file
+    context_object_name = 'all_recipe_list' #how to find the data in the template file
 
     queryset = Recipe.objects.all()
 
@@ -100,16 +100,6 @@ class UpdateRecipeView(UpdateView):
 
     queryset = Recipe.objects.all()
     
-    # def update_view(request):
-    #     if request.method == 'POST':
-    #         form = DietaryForm(request.POST)
-    #         if form.is_valid():
-    #             Diets = form.cleaned_data.get('Diets')
-    #             # do something with your results
-    #     else:
-    #         form = DietaryForm
-
-    #     return render_to_response('update_recipe.html', {'form': form}, context_instance=RequestContext(request))
 
 class OneUserPageView(DetailView):
     """A view to show one user and all its details."""

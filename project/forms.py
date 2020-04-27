@@ -91,25 +91,3 @@ class AddRecipeForm(forms.ModelForm):
         model = UsersRecipes #define which model to use
 
         fields = ['project',] #which fields from model should we use
-
-# class DietaryForm(forms.Form):
-#     """form to make a dynamic dropdown."""
-
-#     OPTIONS = (
-#         ("SUG", "Sugar Free"),
-#         ("VEG", "Vegetarian"),
-#         ("GLU", "Gluten Free"),)
-#     diets = forms.MultipleChoiceField(widget=forms.CheckboxSelectMultiple, choices=OPTIONS)
-
-# class DateInput(forms.DateInput):
-#     input_type = 'date'
-
-
-# class PromiseForm(ModelForm):
-
-#     class Meta:
-#         model = Promise
-#         fields = ['title', 'description', 'made_on']
-#         widgets = {
-#             'made_on': DateInput(),
-#         }

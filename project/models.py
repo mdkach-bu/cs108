@@ -19,10 +19,12 @@ class Project(models.Model):
 
     def __repr__(self):
         """return a string representation of this object."""
+
         return '%s %s' % (self.cook, self.recipe)
 
     def get_absolute_url(self):
         """Return a URL to display this recipe."""
+
         return reverse("recipe", kwargs={"pk": self.pk})
 
     def get_all_comments(self):
@@ -36,13 +38,17 @@ class Project(models.Model):
 
     def __str__(self):
         """return a string representation of this object."""
+
         return self.recipe
 
     class Meta:
+        """this meta class reroutes all things for the Project model to the Recipe Model."""
         abstract = True
 
 
 class Recipe(Project):
+    """this class reroutes all things for the Project model to the Recipe Model."""
+    
     pass
 
 class User(models.Model):
@@ -104,12 +110,12 @@ class StatusMessage(models.Model):
 
 
 class UsersRecipes(models.Model):
-    """A model to connect User and Project(recipe)."""
+    """A model to connect User and Recipe(Project)."""
 
     #foreign key relationships and one data attribute
     timestamp = models.DateTimeField(blank=True, auto_now=True)
     user = models.ForeignKey('User', on_delete=models.CASCADE)
-    project = models.ForeignKey('Recipe', on_delete=models.CASCADE)
+    project = models.ForeignKey('Recipe', on_delete=models.CASCADE) #note that a 'project' is recipe
 
     def __str__(self):
         """return a string representation of this object."""
@@ -124,14 +130,10 @@ class Comment(models.Model):
     message = models.TextField(blank=True)
     user = models.ForeignKey('User', on_delete=models.CASCADE)
     image =  models.URLField(blank=True)
-    project = models.ForeignKey('Recipe', on_delete=models.CASCADE)
+    project = models.ForeignKey('Recipe', on_delete=models.CASCADE) #note that a 'project' is recipe
     
     def __str__(self):
         """return a string representation of this object."""
 
         return '%s %s' % (self.message, self.image)
 
-# class Promise(models.Model):
-#     title = models.CharField(max_length=300)
-#     description = models.TextField(blank=True)
-#     made_on = models.DateField()
